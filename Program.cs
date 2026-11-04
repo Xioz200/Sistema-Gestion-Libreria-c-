@@ -894,12 +894,79 @@ class Program
     }
 
 
+    
+    // ==========================================
+    // FEATURE: BUSQUEDA DE USUARIOS
+    // ==========================================
+
     static void MenuBuscarUsuario()
     {
+        int opcion;
+
+        do
+        {
+            MostrarMenuBuscarUsuario();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    BuscarUsuarioPorNombre();
+                    break;
+
+                case 2:
+                    BuscarUsuarioPorDocumento();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu de busquedas y reportes..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR SUBMENU DE BUSQUEDA DE USUARIOS
+    // ==========================================
+
+    static void MostrarMenuBuscarUsuario()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("           BUSCAR USUARIO");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Buscar por nombre");
+        Console.WriteLine("2. Buscar por ID / documento");
+        Console.WriteLine("0. Volver");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCIONES DE BUSQUEDA
+    // ==========================================
+
+    static void BuscarUsuarioPorNombre()
+    {
         Console.WriteLine(
-            "El submenu de busqueda de usuarios se desarrollara en feat/busqueda-usuarios."
+            "Se ha seleccionado buscar usuarios por nombre."
         );
     }
+
+    static void BuscarUsuarioPorDocumento()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado buscar usuarios por ID o documento."
+        );
+    }
+
 
     static void MenuReportes()
     {
