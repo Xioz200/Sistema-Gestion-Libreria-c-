@@ -732,12 +732,91 @@ class Program
     // MODULO DE BUSQUEDAS Y REPORTES
     // ==========================================
 
+    
+    // ==========================================
+    // FEATURE: MENU DE BUSQUEDAS Y REPORTES
+    // ==========================================
+
     static void MenuBusquedasReportes()
     {
+        int opcion;
+
+        do
+        {
+            MostrarMenuBusquedasReportes();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    MenuBuscarLibro();
+                    break;
+
+                case 2:
+                    MenuBuscarUsuario();
+                    break;
+
+                case 3:
+                    MenuReportes();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu principal..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR MENU DE BUSQUEDAS Y REPORTES
+    // ==========================================
+
+    static void MostrarMenuBusquedasReportes()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("       BUSQUEDAS Y REPORTES");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Buscar libro");
+        Console.WriteLine("2. Buscar usuario");
+        Console.WriteLine("3. Reportes");
+        Console.WriteLine("0. Volver al menu principal");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCESO A LOS SUBMENUS
+    // ==========================================
+
+    static void MenuBuscarLibro()
+    {
         Console.WriteLine(
-            "Se ha seleccionado el modulo de busquedas y reportes."
+            "El submenu de busqueda de libros se desarrollara en feat/busqueda-libros."
         );
     }
+
+    static void MenuBuscarUsuario()
+    {
+        Console.WriteLine(
+            "El submenu de busqueda de usuarios se desarrollara en feat/busqueda-usuarios."
+        );
+    }
+
+    static void MenuReportes()
+    {
+        Console.WriteLine(
+            "El submenu de reportes se desarrollara en feat/reportes."
+        );
+    }
+
 
     // ==========================================
     // MODULO DE GUARDAR / CARGAR DATOS
