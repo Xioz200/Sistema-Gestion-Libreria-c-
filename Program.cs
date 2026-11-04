@@ -12,7 +12,9 @@ class Program
         MostrarMenuPrincipal();
     }
 
-    // MENU PRINCIPAL    
+    // ==========================================
+    // FEATURE 1: MENU PRINCIPAL
+    // ==========================================
 
     static void MostrarMenuPrincipal()
     {
@@ -59,7 +61,7 @@ class Program
     }
 
     // ==========================================
-    // MOSTRAR OPCIONES
+    // MOSTRAR MENU PRINCIPAL
     // ==========================================
 
     static void MostrarOpciones()
@@ -78,27 +80,7 @@ class Program
     }
 
     // ==========================================
-    // LEER OPCION
-    // ==========================================
-
-    static int LeerOpcion()
-    {
-        Console.Write("Seleccione una opcion: ");
-
-        string entrada = Console.ReadLine() ?? string.Empty;
-
-        return int.TryParse(entrada, out int opcion)
-            ? opcion
-            : -1;
-    }
-
-    // ==========================================
-    // ACCESO A LOS MODULOS
-    // ==========================================
-
-
-    // ==========================================
-    // MENU DE LIBROS
+    // FEATURE 2: MENU DE LIBROS
     // ==========================================
 
     static void MenuLibros()
@@ -167,20 +149,13 @@ class Program
     }
 
     // ==========================================
-    // ACCIONES DE LIBROS
+    // ACCIONES GENERALES DE LIBROS
     // ==========================================
 
     static void RegistrarLibro()
     {
         Console.WriteLine(
             "Se ha seleccionado registrar un libro."
-        );
-    }
-
-    static void MenuListarLibros()
-    {
-        Console.WriteLine(
-            "El submenu de listado se desarrollara en feat/listar-libros."
         );
     }
 
@@ -194,7 +169,11 @@ class Program
     static void MenuActualizarLibro()
     {
         Console.WriteLine(
-            "El submenu de actualizacion se desarrollara en feat/actualizar-libros."
+            "Se ha seleccionado actualizar un libro."
+        );
+
+        Console.WriteLine(
+            "El submenu se desarrollara en feat/actualizar-libros."
         );
     }
 
@@ -205,6 +184,93 @@ class Program
         );
     }
 
+    // ==========================================
+    // FEATURE 3: SUBMENU LISTAR LIBROS
+    // ==========================================
+
+    static void MenuListarLibros()
+    {
+        int opcion;
+
+        do
+        {
+            MostrarMenuListarLibros();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    ListarTodosLosLibros();
+                    break;
+
+                case 2:
+                    ListarLibrosDisponibles();
+                    break;
+
+                case 3:
+                    ListarLibrosPrestados();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu de libros..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR SUBMENU DE LISTADO
+    // ==========================================
+
+    static void MostrarMenuListarLibros()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("              LISTAR LIBROS");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Listar todos los libros");
+        Console.WriteLine("2. Listar libros disponibles");
+        Console.WriteLine("3. Listar libros prestados");
+        Console.WriteLine("0. Volver al menu de libros");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCIONES DE LISTADO
+    // ==========================================
+
+    static void ListarTodosLosLibros()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado listar todos los libros."
+        );
+    }
+
+    static void ListarLibrosDisponibles()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado listar los libros disponibles."
+        );
+    }
+
+    static void ListarLibrosPrestados()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado listar los libros prestados."
+        );
+    }
+
+    // ==========================================
+    // MODULO DE USUARIOS
+    // ==========================================
 
     static void MenuUsuarios()
     {
@@ -213,6 +279,10 @@ class Program
         );
     }
 
+    // ==========================================
+    // MODULO DE PRESTAMOS
+    // ==========================================
+
     static void MenuPrestamos()
     {
         Console.WriteLine(
@@ -220,12 +290,20 @@ class Program
         );
     }
 
+    // ==========================================
+    // MODULO DE BUSQUEDAS Y REPORTES
+    // ==========================================
+
     static void MenuBusquedasReportes()
     {
         Console.WriteLine(
             "Se ha seleccionado el modulo de busquedas y reportes."
         );
     }
+
+    // ==========================================
+    // MODULO DE GUARDAR / CARGAR
+    // ==========================================
 
     static void MenuGuardarCargar()
     {
@@ -235,14 +313,27 @@ class Program
     }
 
     // ==========================================
-    // SALIR DEL PROGRAMA
+    // FEATURE: GUARDAR DATOS
+    // ==========================================
+
+    static void GuardarDatos()
+    {
+        Console.WriteLine(
+            "La funcionalidad de guardar datos se desarrollara posteriormente."
+        );
+    }
+
+    // ==========================================
+    // FINALIZAR PROGRAMA
     // ==========================================
 
     static void Salir()
     {
         while (true)
         {
-            Console.Write("¿Desea guardar antes de salir? (S/N): ");
+            Console.Write(
+                "¿Desea guardar antes de salir? (S/N): "
+            );
 
             string respuesta = (
                 Console.ReadLine() ?? string.Empty
@@ -267,24 +358,30 @@ class Program
         }
 
         Console.WriteLine();
-        Console.WriteLine("Gracias por utilizar el sistema de biblioteca.");
+        Console.WriteLine(
+            "Gracias por utilizar el sistema de biblioteca."
+        );
+
         Console.WriteLine("Programa finalizado.");
     }
 
     // ==========================================
-    // GUARDAR DATOS
+    // FUNCIONES GENERALES
     // ==========================================
 
-    static void GuardarDatos()
+    static int LeerOpcion()
     {
-        Console.WriteLine(
-            "La funcionalidad de guardar datos se desarrollara posteriormente."
-        );
-    }
+        Console.Write("Seleccione una opcion: ");
 
-    // ==========================================
-    // VALIDACIONES
-    // ==========================================
+        string entrada = Console.ReadLine() ?? string.Empty;
+
+        if (int.TryParse(entrada, out int opcion))
+        {
+            return opcion;
+        }
+
+        return -1;
+    }
 
     static void MostrarOpcionInvalida()
     {
@@ -293,3 +390,4 @@ class Program
         );
     }
 }
+    
