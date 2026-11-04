@@ -227,7 +227,7 @@ class Program
     }
 
     // ==========================================
-    // MOSTRAR SUBMENU DE LISTADO
+    // MOSTRAR SUBMENU DE LISTADOS
     // ==========================================
 
     static void MostrarMenuListarLibros()
@@ -302,7 +302,7 @@ class Program
     }
 
     // ==========================================
-    // MODULO DE GUARDAR / CARGAR
+    // MODULO DE GUARDAR / CARGAR DATOS
     // ==========================================
 
     static void MenuGuardarCargar()
@@ -313,7 +313,7 @@ class Program
     }
 
     // ==========================================
-    // FEATURE: GUARDAR DATOS
+    // GUARDAR DATOS
     // ==========================================
 
     static void GuardarDatos()
@@ -390,4 +390,3 @@ class Program
         );
     }
 }
-    
