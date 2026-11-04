@@ -620,16 +620,91 @@ class Program
         );
     }
 
+    
+    // ==========================================
+    // FEATURE: LISTAR PRESTAMOS
+    // ==========================================
+
     static void MenuListarPrestamos()
     {
-        Console.WriteLine(
-            "Se ha seleccionado listar los prestamos."
-        );
+        int opcion;
 
+        do
+        {
+            MostrarMenuListarPrestamos();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    ListarTodosLosPrestamos();
+                    break;
+
+                case 2:
+                    ListarPrestamosActivos();
+                    break;
+
+                case 3:
+                    ListarPrestamosCerrados();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu de prestamos..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR SUBMENU DE LISTADOS
+    // ==========================================
+
+    static void MostrarMenuListarPrestamos()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("            LISTAR PRESTAMOS");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Listar todos los prestamos");
+        Console.WriteLine("2. Listar prestamos activos");
+        Console.WriteLine("3. Listar prestamos cerrados");
+        Console.WriteLine("0. Volver al menu de prestamos");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCIONES DE LISTADO
+    // ==========================================
+
+    static void ListarTodosLosPrestamos()
+    {
         Console.WriteLine(
-            "El submenu se desarrollara en feat/listar-prestamos."
+            "Se ha seleccionado listar todos los prestamos."
         );
     }
+
+    static void ListarPrestamosActivos()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado listar los prestamos activos."
+        );
+    }
+
+    static void ListarPrestamosCerrados()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado listar los prestamos cerrados o devueltos."
+        );
+    }
+
 
     static void VerDetallePrestamo()
     {
