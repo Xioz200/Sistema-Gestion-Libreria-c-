@@ -12,9 +12,7 @@ class Program
         MostrarMenuPrincipal();
     }
 
-    // ==========================================
-    // MENU PRINCIPAL
-    // ==========================================
+   // MENU PRINCIPAL    
 
     static void MostrarMenuPrincipal()
     {
@@ -49,7 +47,8 @@ class Program
                     break;
 
                 case 6:
-                    continuar = !Salir();
+                    Salir();
+                    continuar = false;
                     break;
 
                 default:
@@ -67,7 +66,7 @@ class Program
     {
         Console.WriteLine();
         Console.WriteLine("========================================");
-        Console.WriteLine("     SISTEMA DE GESTION DE BIBLIOTECA");
+        Console.WriteLine("       SISTEMA DE GESTION DE BIBLIOTECA");
         Console.WriteLine("========================================");
         Console.WriteLine("1. Libros");
         Console.WriteLine("2. Usuarios");
@@ -79,7 +78,7 @@ class Program
     }
 
     // ==========================================
-    // LEER OPCION DEL USUARIO
+    // LEER OPCION
     // ==========================================
 
     static int LeerOpcion()
@@ -88,12 +87,9 @@ class Program
 
         string entrada = Console.ReadLine() ?? string.Empty;
 
-        if (int.TryParse(entrada, out int opcion))
-        {
-            return opcion;
-        }
-
-        return -1;
+        return int.TryParse(entrada, out int opcion)
+            ? opcion
+            : -1;
     }
 
     // ==========================================
@@ -136,10 +132,10 @@ class Program
     }
 
     // ==========================================
-    // FINALIZAR PROGRAMA
+    // SALIR DEL PROGRAMA
     // ==========================================
 
-    static bool Salir()
+    static void Salir()
     {
         while (true)
         {
@@ -153,7 +149,6 @@ class Program
                 "S", StringComparison.OrdinalIgnoreCase))
             {
                 GuardarDatos();
-
                 break;
             }
 
@@ -171,8 +166,6 @@ class Program
         Console.WriteLine();
         Console.WriteLine("Gracias por utilizar el sistema de biblioteca.");
         Console.WriteLine("Programa finalizado.");
-
-        return true;
     }
 
     // ==========================================
@@ -187,7 +180,7 @@ class Program
     }
 
     // ==========================================
-    // VALIDACIONES GENERALES
+    // VALIDACIONES
     // ==========================================
 
     static void MostrarOpcionInvalida()
