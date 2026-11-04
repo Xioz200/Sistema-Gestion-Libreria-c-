@@ -166,14 +166,88 @@ class Program
         );
     }
 
+    
+    // ==========================================
+    // FEATURE 4: ACTUALIZAR LIBROS
+    // ==========================================
+
     static void MenuActualizarLibro()
     {
-        Console.WriteLine(
-            "Se ha seleccionado actualizar un libro."
-        );
+        int opcion;
 
+        do
+        {
+            MostrarMenuActualizarLibro();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    EditarTituloLibro();
+                    break;
+
+                case 2:
+                    EditarAutorLibro();
+                    break;
+
+                case 3:
+                    EditarAnioCategoriaLibro();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu de libros..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR SUBMENU DE ACTUALIZACION
+    // ==========================================
+
+    static void MostrarMenuActualizarLibro()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("           ACTUALIZAR LIBRO");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Editar titulo");
+        Console.WriteLine("2. Editar autor");
+        Console.WriteLine("3. Editar anio / categoria");
+        Console.WriteLine("0. Volver al menu de libros");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCIONES DE ACTUALIZACION
+    // ==========================================
+
+    static void EditarTituloLibro()
+    {
         Console.WriteLine(
-            "El submenu se desarrollara en feat/actualizar-libros."
+            "Se ha seleccionado editar el titulo de un libro."
+        );
+    }
+
+    static void EditarAutorLibro()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado editar el autor de un libro."
+        );
+    }
+
+    static void EditarAnioCategoriaLibro()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado editar el anio o categoria de un libro."
         );
     }
 
