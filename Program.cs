@@ -441,16 +441,91 @@ class Program
         );
     }
 
+    
+    // ==========================================
+    // FEATURE: ACTUALIZAR USUARIOS
+    // ==========================================
+
     static void MenuActualizarUsuario()
     {
-        Console.WriteLine(
-            "Se ha seleccionado actualizar un usuario."
-        );
+        int opcion;
 
+        do
+        {
+            MostrarMenuActualizarUsuario();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    EditarNombreUsuario();
+                    break;
+
+                case 2:
+                    EditarContactoUsuario();
+                    break;
+
+                case 3:
+                    CambiarEstadoUsuario();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu de usuarios..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR SUBMENU DE ACTUALIZACION
+    // ==========================================
+
+    static void MostrarMenuActualizarUsuario()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("          ACTUALIZAR USUARIO");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Editar nombre");
+        Console.WriteLine("2. Editar contacto");
+        Console.WriteLine("3. Activar / desactivar usuario");
+        Console.WriteLine("0. Volver al menu de usuarios");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCIONES DE ACTUALIZACION
+    // ==========================================
+
+    static void EditarNombreUsuario()
+    {
         Console.WriteLine(
-            "El submenu se desarrollara en feat/actualizar-usuarios."
+            "Se ha seleccionado editar el nombre del usuario."
         );
     }
+
+    static void EditarContactoUsuario()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado editar el contacto del usuario."
+        );
+    }
+
+    static void CambiarEstadoUsuario()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado activar o desactivar un usuario."
+        );
+    }
+
 
     static void EliminarUsuario()
     {
