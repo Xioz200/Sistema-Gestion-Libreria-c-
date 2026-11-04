@@ -539,12 +539,119 @@ class Program
     // MODULO DE PRESTAMOS
     // ==========================================
 
+    
+    // ==========================================
+    // FEATURE: MENU DE PRESTAMOS
+    // ==========================================
+
     static void MenuPrestamos()
     {
+        int opcion;
+
+        do
+        {
+            MostrarMenuPrestamos();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    CrearPrestamo();
+                    break;
+
+                case 2:
+                    MenuListarPrestamos();
+                    break;
+
+                case 3:
+                    VerDetallePrestamo();
+                    break;
+
+                case 4:
+                    RegistrarDevolucion();
+                    break;
+
+                case 5:
+                    EliminarPrestamo();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu principal..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR MENU DE PRESTAMOS
+    // ==========================================
+
+    static void MostrarMenuPrestamos()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("          GESTION DE PRESTAMOS");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Crear prestamo");
+        Console.WriteLine("2. Listar prestamos");
+        Console.WriteLine("3. Ver detalle de prestamo");
+        Console.WriteLine("4. Registrar devolucion");
+        Console.WriteLine("5. Eliminar prestamo");
+        Console.WriteLine("0. Volver al menu principal");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCIONES DE PRESTAMOS
+    // ==========================================
+
+    static void CrearPrestamo()
+    {
         Console.WriteLine(
-            "Se ha seleccionado el modulo de prestamos."
+            "Se ha seleccionado crear un prestamo."
         );
     }
+
+    static void MenuListarPrestamos()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado listar los prestamos."
+        );
+
+        Console.WriteLine(
+            "El submenu se desarrollara en feat/listar-prestamos."
+        );
+    }
+
+    static void VerDetallePrestamo()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado consultar el detalle de un prestamo."
+        );
+    }
+
+    static void RegistrarDevolucion()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado registrar una devolucion."
+        );
+    }
+
+    static void EliminarPrestamo()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado eliminar un prestamo."
+        );
+    }
+
 
     // ==========================================
     // MODULO DE BUSQUEDAS Y REPORTES
