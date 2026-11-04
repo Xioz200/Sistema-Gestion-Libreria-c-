@@ -796,12 +796,103 @@ class Program
     // ACCESO A LOS SUBMENUS
     // ==========================================
 
+    
+    // ==========================================
+    // FEATURE: BUSQUEDA DE LIBROS
+    // ==========================================
+
     static void MenuBuscarLibro()
     {
+        int opcion;
+
+        do
+        {
+            MostrarMenuBuscarLibro();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    BuscarLibroPorTitulo();
+                    break;
+
+                case 2:
+                    BuscarLibroPorAutor();
+                    break;
+
+                case 3:
+                    BuscarLibroPorIdIsbn();
+                    break;
+
+                case 4:
+                    BuscarLibroPorCategoria();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu de busquedas y reportes..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR SUBMENU DE BUSQUEDA
+    // ==========================================
+
+    static void MostrarMenuBuscarLibro()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("              BUSCAR LIBRO");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Buscar por titulo");
+        Console.WriteLine("2. Buscar por autor");
+        Console.WriteLine("3. Buscar por ID / ISBN");
+        Console.WriteLine("4. Buscar por categoria");
+        Console.WriteLine("0. Volver");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCIONES DE BUSQUEDA
+    // ==========================================
+
+    static void BuscarLibroPorTitulo()
+    {
         Console.WriteLine(
-            "El submenu de busqueda de libros se desarrollara en feat/busqueda-libros."
+            "Se ha seleccionado buscar libros por titulo."
         );
     }
+
+    static void BuscarLibroPorAutor()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado buscar libros por autor."
+        );
+    }
+
+    static void BuscarLibroPorIdIsbn()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado buscar libros por ID o ISBN."
+        );
+    }
+
+    static void BuscarLibroPorCategoria()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado buscar libros por categoria."
+        );
+    }
+
 
     static void MenuBuscarUsuario()
     {
