@@ -968,12 +968,103 @@ class Program
     }
 
 
+    
+    // ==========================================
+    // FEATURE: REPORTES
+    // ==========================================
+
     static void MenuReportes()
     {
+        int opcion;
+
+        do
+        {
+            MostrarMenuReportes();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    ReportePrestamosPorUsuario();
+                    break;
+
+                case 2:
+                    ReportePrestamosPorLibro();
+                    break;
+
+                case 3:
+                    ReportePrestamosVencidos();
+                    break;
+
+                case 4:
+                    ReporteResumenGeneral();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu de busquedas y reportes..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR MENU DE REPORTES
+    // ==========================================
+
+    static void MostrarMenuReportes()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("                REPORTES");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Prestamos por usuario");
+        Console.WriteLine("2. Prestamos por libro");
+        Console.WriteLine("3. Prestamos vencidos");
+        Console.WriteLine("4. Resumen general de libros");
+        Console.WriteLine("0. Volver al menu de busquedas y reportes");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCIONES DE REPORTES
+    // ==========================================
+
+    static void ReportePrestamosPorUsuario()
+    {
         Console.WriteLine(
-            "El submenu de reportes se desarrollara en feat/reportes."
+            "Se ha seleccionado el reporte de prestamos por usuario."
         );
     }
+
+    static void ReportePrestamosPorLibro()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado el reporte de prestamos por libro."
+        );
+    }
+
+    static void ReportePrestamosVencidos()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado el reporte de prestamos vencidos."
+        );
+    }
+
+    static void ReporteResumenGeneral()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado el resumen general de libros."
+        );
+    }
+
 
 
     // ==========================================
