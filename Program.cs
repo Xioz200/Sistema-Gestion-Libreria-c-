@@ -346,12 +346,119 @@ class Program
     // MODULO DE USUARIOS
     // ==========================================
 
+    
+    // ==========================================
+    // FEATURE 5: MENU DE USUARIOS
+    // ==========================================
+
     static void MenuUsuarios()
     {
+        int opcion;
+
+        do
+        {
+            MostrarMenuUsuarios();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    RegistrarUsuario();
+                    break;
+
+                case 2:
+                    ListarUsuarios();
+                    break;
+
+                case 3:
+                    VerDetalleUsuario();
+                    break;
+
+                case 4:
+                    MenuActualizarUsuario();
+                    break;
+
+                case 5:
+                    EliminarUsuario();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu principal..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR MENU DE USUARIOS
+    // ==========================================
+
+    static void MostrarMenuUsuarios()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("            GESTION DE USUARIOS");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Registrar usuario");
+        Console.WriteLine("2. Listar usuarios");
+        Console.WriteLine("3. Ver detalle de usuario");
+        Console.WriteLine("4. Actualizar usuario");
+        Console.WriteLine("5. Eliminar usuario");
+        Console.WriteLine("0. Volver al menu principal");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCIONES DE USUARIOS
+    // ==========================================
+
+    static void RegistrarUsuario()
+    {
         Console.WriteLine(
-            "Se ha seleccionado el modulo de usuarios."
+            "Se ha seleccionado registrar un usuario."
         );
     }
+
+    static void ListarUsuarios()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado listar los usuarios."
+        );
+    }
+
+    static void VerDetalleUsuario()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado consultar el detalle de un usuario."
+        );
+    }
+
+    static void MenuActualizarUsuario()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado actualizar un usuario."
+        );
+
+        Console.WriteLine(
+            "El submenu se desarrollara en feat/actualizar-usuarios."
+        );
+    }
+
+    static void EliminarUsuario()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado eliminar un usuario."
+        );
+    }
+
 
     // ==========================================
     // MODULO DE PRESTAMOS
