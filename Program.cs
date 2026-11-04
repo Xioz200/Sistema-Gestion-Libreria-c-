@@ -12,7 +12,7 @@ class Program
         MostrarMenuPrincipal();
     }
 
-   // MENU PRINCIPAL    
+    // MENU PRINCIPAL    
 
     static void MostrarMenuPrincipal()
     {
@@ -96,10 +96,112 @@ class Program
     // ACCESO A LOS MODULOS
     // ==========================================
 
+
+    // ==========================================
+    // MENU DE LIBROS
+    // ==========================================
+
     static void MenuLibros()
     {
+        int opcion;
+
+        do
+        {
+            MostrarMenuLibros();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    RegistrarLibro();
+                    break;
+
+                case 2:
+                    MenuListarLibros();
+                    break;
+
+                case 3:
+                    VerDetalleLibro();
+                    break;
+
+                case 4:
+                    MenuActualizarLibro();
+                    break;
+
+                case 5:
+                    EliminarLibro();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu principal..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR MENU DE LIBROS
+    // ==========================================
+
+    static void MostrarMenuLibros()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("             GESTION DE LIBROS");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Registrar libro");
+        Console.WriteLine("2. Listar libros");
+        Console.WriteLine("3. Ver detalle de libro");
+        Console.WriteLine("4. Actualizar libro");
+        Console.WriteLine("5. Eliminar libro");
+        Console.WriteLine("0. Volver al menu principal");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // ACCIONES DE LIBROS
+    // ==========================================
+
+    static void RegistrarLibro()
+    {
         Console.WriteLine(
-            "Se ha seleccionado el modulo de libros."
+            "Se ha seleccionado registrar un libro."
+        );
+    }
+
+    static void MenuListarLibros()
+    {
+        Console.WriteLine(
+            "El submenu de listado se desarrollara en feat/listar-libros."
+        );
+    }
+
+    static void VerDetalleLibro()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado consultar el detalle de un libro."
+        );
+    }
+
+    static void MenuActualizarLibro()
+    {
+        Console.WriteLine(
+            "El submenu de actualizacion se desarrollara en feat/actualizar-libros."
+        );
+    }
+
+    static void EliminarLibro()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado eliminar un libro."
         );
     }
 
