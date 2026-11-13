@@ -1071,12 +1071,126 @@ class Program
     // MODULO DE GUARDAR / CARGAR DATOS
     // ==========================================
 
+    
+    // ==========================================
+    // FEATURE: GUARDAR Y CARGAR DATOS
+    // ==========================================
+
     static void MenuGuardarCargar()
     {
+        int opcion;
+
+        do
+        {
+            MostrarMenuGuardarCargar();
+
+            opcion = LeerOpcion();
+
+            switch (opcion)
+            {
+                case 1:
+                    GuardarDatos();
+                    break;
+
+                case 2:
+                    CargarDatos();
+                    break;
+
+                case 3:
+                    ConfirmarReinicioDatos();
+                    break;
+
+                case 0:
+                    Console.WriteLine(
+                        "Regresando al menu principal..."
+                    );
+                    break;
+
+                default:
+                    MostrarOpcionInvalida();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    // ==========================================
+    // MOSTRAR MENU DE GESTION DE DATOS
+    // ==========================================
+
+    static void MostrarMenuGuardarCargar()
+    {
+        Console.WriteLine();
+        Console.WriteLine("========================================");
+        Console.WriteLine("             GESTION DE DATOS");
+        Console.WriteLine("========================================");
+        Console.WriteLine("1. Guardar datos");
+        Console.WriteLine("2. Cargar datos");
+        Console.WriteLine("3. Reiniciar datos");
+        Console.WriteLine("0. Volver al menu principal");
+        Console.WriteLine("========================================");
+    }
+
+    // ==========================================
+    // CARGAR DATOS
+    // ==========================================
+
+    static void CargarDatos()
+    {
         Console.WriteLine(
-            "Se ha seleccionado el modulo de guardar y cargar datos."
+            "Se ha seleccionado cargar los datos de la biblioteca."
         );
     }
+
+    // ==========================================
+    // CONFIRMAR REINICIO
+    // ==========================================
+
+    static void ConfirmarReinicioDatos()
+    {
+        while (true)
+        {
+            Console.Write(
+                "¿Confirma que desea reiniciar todos los datos? (S/N): "
+            );
+
+            string respuesta = (
+                Console.ReadLine() ?? string.Empty
+            ).Trim();
+
+            if (respuesta.Equals(
+                "S", StringComparison.OrdinalIgnoreCase))
+            {
+                ReiniciarDatos();
+                return;
+            }
+
+            if (respuesta.Equals(
+                "N", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine(
+                    "Se ha cancelado el reinicio de datos."
+                );
+                return;
+            }
+
+            Console.WriteLine(
+                "Respuesta no valida. Escriba S o N."
+            );
+        }
+    }
+
+    // ==========================================
+    // REINICIAR DATOS
+    // ==========================================
+
+    static void ReiniciarDatos()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado reiniciar los datos de la biblioteca."
+        );
+    }
+
 
     // ==========================================
     // GUARDAR DATOS
