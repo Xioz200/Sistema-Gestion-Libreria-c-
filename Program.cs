@@ -9,43 +9,53 @@ class Program
 
     static void Main()
     {
-        MostrarMenuPrincipal();
+        ShowMainMenu();
     }
 
     // ==========================================
-    // FEATURE 1: MENU PRINCIPAL
+    // MENU PRINCIPAL
     // ==========================================
 
-    static void MostrarMenuPrincipal()
+    static void ShowMainMenu()
     {
         bool continuar = true;
 
         while (continuar)
         {
-            MostrarOpciones();
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine("       SISTEMA DE GESTION DE BIBLIOTECA");
+            Console.WriteLine("========================================");
+            Console.WriteLine("1. Libros");
+            Console.WriteLine("2. Usuarios");
+            Console.WriteLine("3. Prestamos");
+            Console.WriteLine("4. Busquedas y reportes");
+            Console.WriteLine("5. Guardar / Cargar datos");
+            Console.WriteLine("6. Salir");
+            Console.WriteLine("========================================");
 
-            int opcion = LeerOpcion();
+            int opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    MenuLibros();
+                    ShowBooksMenu();
                     break;
 
                 case 2:
-                    MenuUsuarios();
+                    ShowUsersMenu();
                     break;
 
                 case 3:
-                    MenuPrestamos();
+                    ShowLoansMenu();
                     break;
 
                 case 4:
-                    MenuBusquedasReportes();
+                    ShowSearchReportsMenu();
                     break;
 
                 case 5:
-                    MenuGuardarCargar();
+                    ShowPersistenceMenu();
                     break;
 
                 case 6:
@@ -53,1104 +63,886 @@ class Program
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
         }
     }
 
     // ==========================================
-    // MOSTRAR MENU PRINCIPAL
+    // FEATURE: BOOKS MENU
     // ==========================================
 
-    static void MostrarOpciones()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("       SISTEMA DE GESTION DE BIBLIOTECA");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Libros");
-        Console.WriteLine("2. Usuarios");
-        Console.WriteLine("3. Prestamos");
-        Console.WriteLine("4. Busquedas y reportes");
-        Console.WriteLine("5. Guardar / Cargar datos");
-        Console.WriteLine("6. Salir");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // FEATURE 2: MENU DE LIBROS
-    // ==========================================
-
-    static void MenuLibros()
+    static void ShowBooksMenu()
     {
         int opcion;
 
         do
         {
-            MostrarMenuLibros();
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine("             GESTION DE LIBROS");
+            Console.WriteLine("========================================");
+            Console.WriteLine("1. Registrar libro");
+            Console.WriteLine("2. Listar libros");
+            Console.WriteLine("3. Ver detalle de libro");
+            Console.WriteLine("4. Actualizar libro");
+            Console.WriteLine("5. Eliminar libro");
+            Console.WriteLine("0. Volver al menu principal");
+            Console.WriteLine("========================================");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    RegistrarLibro();
+                    RegisterBook();
                     break;
 
                 case 2:
-                    MenuListarLibros();
+                    ListBooksMenu();
                     break;
 
                 case 3:
-                    VerDetalleLibro();
+                    ViewBookDetail();
                     break;
 
                 case 4:
-                    MenuActualizarLibro();
+                    UpdateBookMenu();
                     break;
 
                 case 5:
-                    EliminarLibro();
+                    DeleteBook();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu principal..."
-                    );
+                    Console.WriteLine("Regresando al menu principal...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR MENU DE LIBROS
-    // ==========================================
+    // REGISTRAR LIBRO
 
-    static void MostrarMenuLibros()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("             GESTION DE LIBROS");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Registrar libro");
-        Console.WriteLine("2. Listar libros");
-        Console.WriteLine("3. Ver detalle de libro");
-        Console.WriteLine("4. Actualizar libro");
-        Console.WriteLine("5. Eliminar libro");
-        Console.WriteLine("0. Volver al menu principal");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // ACCIONES GENERALES DE LIBROS
-    // ==========================================
-
-    static void RegistrarLibro()
+    static void RegisterBook()
     {
         Console.WriteLine(
             "Se ha seleccionado registrar un libro."
         );
     }
 
-    static void VerDetalleLibro()
-    {
-        Console.WriteLine(
-            "Se ha seleccionado consultar el detalle de un libro."
-        );
-    }
+    // LISTAR LIBROS
 
-    
-    // ==========================================
-    // FEATURE 4: ACTUALIZAR LIBROS
-    // ==========================================
-
-    static void MenuActualizarLibro()
+    static void ListBooksMenu()
     {
         int opcion;
 
         do
         {
-            MostrarMenuActualizarLibro();
+            Console.WriteLine();
+            Console.WriteLine("========== LISTAR LIBROS ==========");
+            Console.WriteLine("1. Listar todos");
+            Console.WriteLine("2. Listar disponibles");
+            Console.WriteLine("3. Listar prestados");
+            Console.WriteLine("0. Volver");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    EditarTituloLibro();
+                    ListBooksAll();
                     break;
 
                 case 2:
-                    EditarAutorLibro();
+                    ListBooksAvailable();
                     break;
 
                 case 3:
-                    EditarAnioCategoriaLibro();
+                    ListBooksBorrowed();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu de libros..."
-                    );
+                    Console.WriteLine("Regresando al menu de libros...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR SUBMENU DE ACTUALIZACION
-    // ==========================================
-
-    static void MostrarMenuActualizarLibro()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("           ACTUALIZAR LIBRO");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Editar titulo");
-        Console.WriteLine("2. Editar autor");
-        Console.WriteLine("3. Editar anio / categoria");
-        Console.WriteLine("0. Volver al menu de libros");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // ACCIONES DE ACTUALIZACION
-    // ==========================================
-
-    static void EditarTituloLibro()
-    {
-        Console.WriteLine(
-            "Se ha seleccionado editar el titulo de un libro."
-        );
-    }
-
-    static void EditarAutorLibro()
-    {
-        Console.WriteLine(
-            "Se ha seleccionado editar el autor de un libro."
-        );
-    }
-
-    static void EditarAnioCategoriaLibro()
-    {
-        Console.WriteLine(
-            "Se ha seleccionado editar el anio o categoria de un libro."
-        );
-    }
-
-    static void EliminarLibro()
-    {
-        Console.WriteLine(
-            "Se ha seleccionado eliminar un libro."
-        );
-    }
-
-    // ==========================================
-    // FEATURE 3: SUBMENU LISTAR LIBROS
-    // ==========================================
-
-    static void MenuListarLibros()
-    {
-        int opcion;
-
-        do
-        {
-            MostrarMenuListarLibros();
-
-            opcion = LeerOpcion();
-
-            switch (opcion)
-            {
-                case 1:
-                    ListarTodosLosLibros();
-                    break;
-
-                case 2:
-                    ListarLibrosDisponibles();
-                    break;
-
-                case 3:
-                    ListarLibrosPrestados();
-                    break;
-
-                case 0:
-                    Console.WriteLine(
-                        "Regresando al menu de libros..."
-                    );
-                    break;
-
-                default:
-                    MostrarOpcionInvalida();
-                    break;
-            }
-
-        } while (opcion != 0);
-    }
-
-    // ==========================================
-    // MOSTRAR SUBMENU DE LISTADOS
-    // ==========================================
-
-    static void MostrarMenuListarLibros()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("              LISTAR LIBROS");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Listar todos los libros");
-        Console.WriteLine("2. Listar libros disponibles");
-        Console.WriteLine("3. Listar libros prestados");
-        Console.WriteLine("0. Volver al menu de libros");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // ACCIONES DE LISTADO
-    // ==========================================
-
-    static void ListarTodosLosLibros()
+    static void ListBooksAll()
     {
         Console.WriteLine(
             "Se ha seleccionado listar todos los libros."
         );
     }
 
-    static void ListarLibrosDisponibles()
+    static void ListBooksAvailable()
     {
         Console.WriteLine(
             "Se ha seleccionado listar los libros disponibles."
         );
     }
 
-    static void ListarLibrosPrestados()
+    static void ListBooksBorrowed()
     {
         Console.WriteLine(
             "Se ha seleccionado listar los libros prestados."
         );
     }
 
-    // ==========================================
-    // MODULO DE USUARIOS
-    // ==========================================
+    // DETALLE DE LIBRO
 
-    
-    // ==========================================
-    // FEATURE 5: MENU DE USUARIOS
-    // ==========================================
+    static void ViewBookDetail()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado consultar el detalle de un libro por ID o ISBN."
+        );
+    }
 
-    static void MenuUsuarios()
+    // ACTUALIZAR LIBRO
+
+    static void UpdateBookMenu()
     {
         int opcion;
 
         do
         {
-            MostrarMenuUsuarios();
+            Console.WriteLine();
+            Console.WriteLine("========== ACTUALIZAR LIBRO ==========");
+            Console.WriteLine("1. Editar titulo");
+            Console.WriteLine("2. Editar autor");
+            Console.WriteLine("3. Editar año / categoria");
+            Console.WriteLine("0. Volver");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    RegistrarUsuario();
+                    EditBookTitle();
                     break;
 
                 case 2:
-                    ListarUsuarios();
+                    EditBookAuthor();
                     break;
 
                 case 3:
-                    VerDetalleUsuario();
-                    break;
-
-                case 4:
-                    MenuActualizarUsuario();
-                    break;
-
-                case 5:
-                    EliminarUsuario();
+                    EditBookYearCategory();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu principal..."
-                    );
+                    Console.WriteLine("Regresando al menu de libros...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR MENU DE USUARIOS
-    // ==========================================
-
-    static void MostrarMenuUsuarios()
+    static void EditBookTitle()
     {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("            GESTION DE USUARIOS");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Registrar usuario");
-        Console.WriteLine("2. Listar usuarios");
-        Console.WriteLine("3. Ver detalle de usuario");
-        Console.WriteLine("4. Actualizar usuario");
-        Console.WriteLine("5. Eliminar usuario");
-        Console.WriteLine("0. Volver al menu principal");
-        Console.WriteLine("========================================");
+        Console.WriteLine(
+            "Se ha seleccionado editar el titulo del libro."
+        );
+    }
+
+    static void EditBookAuthor()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado editar el autor del libro."
+        );
+    }
+
+    static void EditBookYearCategory()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado editar el año o la categoria del libro."
+        );
+    }
+
+    // ELIMINAR LIBRO
+
+    static void DeleteBook()
+    {
+        Console.WriteLine(
+            "Se ha seleccionado eliminar un libro."
+        );
+
+        Console.WriteLine(
+            "Validacion: no permitir eliminar el libro si esta prestado."
+        );
     }
 
     // ==========================================
-    // ACCIONES DE USUARIOS
+    // FEATURE: USERS MENU
     // ==========================================
 
-    static void RegistrarUsuario()
+    static void ShowUsersMenu()
+    {
+        int opcion;
+
+        do
+        {
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine("           GESTION DE USUARIOS");
+            Console.WriteLine("========================================");
+            Console.WriteLine("1. Registrar usuario");
+            Console.WriteLine("2. Listar usuarios");
+            Console.WriteLine("3. Ver detalle de usuario");
+            Console.WriteLine("4. Actualizar usuario");
+            Console.WriteLine("5. Eliminar usuario");
+            Console.WriteLine("0. Volver al menu principal");
+            Console.WriteLine("========================================");
+
+            opcion = ReadOption();
+
+            switch (opcion)
+            {
+                case 1:
+                    RegisterUser();
+                    break;
+
+                case 2:
+                    ListUsers();
+                    break;
+
+                case 3:
+                    ViewUserDetail();
+                    break;
+
+                case 4:
+                    UpdateUserMenu();
+                    break;
+
+                case 5:
+                    DeleteUser();
+                    break;
+
+                case 0:
+                    Console.WriteLine("Regresando al menu principal...");
+                    break;
+
+                default:
+                    ShowInvalidOption();
+                    break;
+            }
+
+        } while (opcion != 0);
+    }
+
+    static void RegisterUser()
     {
         Console.WriteLine(
             "Se ha seleccionado registrar un usuario."
         );
     }
 
-    static void ListarUsuarios()
+    static void ListUsers()
     {
         Console.WriteLine(
             "Se ha seleccionado listar los usuarios."
         );
     }
 
-    static void VerDetalleUsuario()
+    static void ViewUserDetail()
     {
         Console.WriteLine(
-            "Se ha seleccionado consultar el detalle de un usuario."
+            "Se ha seleccionado consultar un usuario por ID o documento."
         );
     }
 
-    
-    // ==========================================
-    // FEATURE: ACTUALIZAR USUARIOS
-    // ==========================================
+    // ACTUALIZAR USUARIO
 
-    static void MenuActualizarUsuario()
+    static void UpdateUserMenu()
     {
         int opcion;
 
         do
         {
-            MostrarMenuActualizarUsuario();
+            Console.WriteLine();
+            Console.WriteLine("========== ACTUALIZAR USUARIO ==========");
+            Console.WriteLine("1. Editar nombre");
+            Console.WriteLine("2. Editar contacto");
+            Console.WriteLine("3. Activar / desactivar");
+            Console.WriteLine("0. Volver");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    EditarNombreUsuario();
+                    EditUserName();
                     break;
 
                 case 2:
-                    EditarContactoUsuario();
+                    EditUserContact();
                     break;
 
                 case 3:
-                    CambiarEstadoUsuario();
+                    ToggleUserActiveStatus();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu de usuarios..."
-                    );
+                    Console.WriteLine("Regresando al menu de usuarios...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR SUBMENU DE ACTUALIZACION
-    // ==========================================
-
-    static void MostrarMenuActualizarUsuario()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("          ACTUALIZAR USUARIO");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Editar nombre");
-        Console.WriteLine("2. Editar contacto");
-        Console.WriteLine("3. Activar / desactivar usuario");
-        Console.WriteLine("0. Volver al menu de usuarios");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // ACCIONES DE ACTUALIZACION
-    // ==========================================
-
-    static void EditarNombreUsuario()
+    static void EditUserName()
     {
         Console.WriteLine(
             "Se ha seleccionado editar el nombre del usuario."
         );
     }
 
-    static void EditarContactoUsuario()
+    static void EditUserContact()
     {
         Console.WriteLine(
             "Se ha seleccionado editar el contacto del usuario."
         );
     }
 
-    static void CambiarEstadoUsuario()
+    static void ToggleUserActiveStatus()
     {
         Console.WriteLine(
             "Se ha seleccionado activar o desactivar un usuario."
         );
     }
 
-
-    static void EliminarUsuario()
+    static void DeleteUser()
     {
         Console.WriteLine(
             "Se ha seleccionado eliminar un usuario."
         );
+
+        Console.WriteLine(
+            "Validacion: no permitir eliminar usuarios con prestamos activos."
+        );
     }
 
-
     // ==========================================
-    // MODULO DE PRESTAMOS
-    // ==========================================
-
-    
-    // ==========================================
-    // FEATURE: MENU DE PRESTAMOS
+    // FEATURE: LOANS MENU
     // ==========================================
 
-    static void MenuPrestamos()
+    static void ShowLoansMenu()
     {
         int opcion;
 
         do
         {
-            MostrarMenuPrestamos();
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine("           GESTION DE PRESTAMOS");
+            Console.WriteLine("========================================");
+            Console.WriteLine("1. Crear prestamo");
+            Console.WriteLine("2. Listar prestamos");
+            Console.WriteLine("3. Ver detalle de prestamo");
+            Console.WriteLine("4. Registrar devolucion");
+            Console.WriteLine("5. Eliminar prestamo");
+            Console.WriteLine("0. Volver al menu principal");
+            Console.WriteLine("========================================");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    CrearPrestamo();
+                    CreateLoan();
                     break;
 
                 case 2:
-                    MenuListarPrestamos();
+                    ListLoansMenu();
                     break;
 
                 case 3:
-                    VerDetallePrestamo();
+                    ViewLoanDetail();
                     break;
 
                 case 4:
-                    RegistrarDevolucion();
+                    RegisterReturn();
                     break;
 
                 case 5:
-                    EliminarPrestamo();
+                    DeleteLoan();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu principal..."
-                    );
+                    Console.WriteLine("Regresando al menu principal...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR MENU DE PRESTAMOS
-    // ==========================================
-
-    static void MostrarMenuPrestamos()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("          GESTION DE PRESTAMOS");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Crear prestamo");
-        Console.WriteLine("2. Listar prestamos");
-        Console.WriteLine("3. Ver detalle de prestamo");
-        Console.WriteLine("4. Registrar devolucion");
-        Console.WriteLine("5. Eliminar prestamo");
-        Console.WriteLine("0. Volver al menu principal");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // ACCIONES DE PRESTAMOS
-    // ==========================================
-
-    static void CrearPrestamo()
+    static void CreateLoan()
     {
         Console.WriteLine(
             "Se ha seleccionado crear un prestamo."
         );
+
+        Console.WriteLine("Validaciones sugeridas:");
+        Console.WriteLine("- El usuario debe existir y estar activo.");
+        Console.WriteLine("- El libro debe existir y estar disponible.");
+        Console.WriteLine("- Verificar el maximo de prestamos activos por usuario.");
     }
 
-    
-    // ==========================================
-    // FEATURE: LISTAR PRESTAMOS
-    // ==========================================
+    // LISTAR PRESTAMOS
 
-    static void MenuListarPrestamos()
+    static void ListLoansMenu()
     {
         int opcion;
 
         do
         {
-            MostrarMenuListarPrestamos();
+            Console.WriteLine();
+            Console.WriteLine("========== LISTAR PRESTAMOS ==========");
+            Console.WriteLine("1. Listar todos");
+            Console.WriteLine("2. Listar activos");
+            Console.WriteLine("3. Listar cerrados");
+            Console.WriteLine("0. Volver");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    ListarTodosLosPrestamos();
+                    ListLoansAll();
                     break;
 
                 case 2:
-                    ListarPrestamosActivos();
+                    ListLoansActive();
                     break;
 
                 case 3:
-                    ListarPrestamosCerrados();
+                    ListLoansClosed();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu de prestamos..."
-                    );
+                    Console.WriteLine("Regresando al menu de prestamos...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR SUBMENU DE LISTADOS
-    // ==========================================
-
-    static void MostrarMenuListarPrestamos()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("            LISTAR PRESTAMOS");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Listar todos los prestamos");
-        Console.WriteLine("2. Listar prestamos activos");
-        Console.WriteLine("3. Listar prestamos cerrados");
-        Console.WriteLine("0. Volver al menu de prestamos");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // ACCIONES DE LISTADO
-    // ==========================================
-
-    static void ListarTodosLosPrestamos()
+    static void ListLoansAll()
     {
         Console.WriteLine(
             "Se ha seleccionado listar todos los prestamos."
         );
     }
 
-    static void ListarPrestamosActivos()
+    static void ListLoansActive()
     {
         Console.WriteLine(
             "Se ha seleccionado listar los prestamos activos."
         );
     }
 
-    static void ListarPrestamosCerrados()
+    static void ListLoansClosed()
     {
         Console.WriteLine(
             "Se ha seleccionado listar los prestamos cerrados o devueltos."
         );
     }
 
-
-    static void VerDetallePrestamo()
+    static void ViewLoanDetail()
     {
         Console.WriteLine(
-            "Se ha seleccionado consultar el detalle de un prestamo."
+            "Se ha seleccionado consultar el detalle de un prestamo por ID."
         );
     }
 
-    static void RegistrarDevolucion()
+    static void RegisterReturn()
     {
         Console.WriteLine(
-            "Se ha seleccionado registrar una devolucion."
+            "Se ha seleccionado registrar la devolucion de un prestamo."
+        );
+
+        Console.WriteLine(
+            "Accion prevista: cambiar el estado del prestamo a devuelto."
+        );
+
+        Console.WriteLine(
+            "Accion prevista: marcar el libro como disponible."
         );
     }
 
-    static void EliminarPrestamo()
+    static void DeleteLoan()
     {
         Console.WriteLine(
             "Se ha seleccionado eliminar un prestamo."
         );
+
+        Console.WriteLine(
+            "Regla sugerida: eliminar solo si esta cerrado o fue creado por error."
+        );
+
+        Console.WriteLine(
+            "Si se elimina un prestamo activo, devolver el libro automaticamente."
+        );
     }
 
-
     // ==========================================
-    // MODULO DE BUSQUEDAS Y REPORTES
-    // ==========================================
-
-    
-    // ==========================================
-    // FEATURE: MENU DE BUSQUEDAS Y REPORTES
+    // FEATURE: SEARCH AND REPORTS MENU
     // ==========================================
 
-    static void MenuBusquedasReportes()
+    static void ShowSearchReportsMenu()
     {
         int opcion;
 
         do
         {
-            MostrarMenuBusquedasReportes();
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine("       BUSQUEDAS Y REPORTES");
+            Console.WriteLine("========================================");
+            Console.WriteLine("1. Buscar libro");
+            Console.WriteLine("2. Buscar usuario");
+            Console.WriteLine("3. Reportes");
+            Console.WriteLine("0. Volver al menu principal");
+            Console.WriteLine("========================================");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    MenuBuscarLibro();
+                    SearchBook();
                     break;
 
                 case 2:
-                    MenuBuscarUsuario();
+                    SearchUser();
                     break;
 
                 case 3:
-                    MenuReportes();
+                    ShowReportsMenu();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu principal..."
-                    );
+                    Console.WriteLine("Regresando al menu principal...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR MENU DE BUSQUEDAS Y REPORTES
-    // ==========================================
+    // BUSQUEDA DE LIBROS
 
-    static void MostrarMenuBusquedasReportes()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("       BUSQUEDAS Y REPORTES");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Buscar libro");
-        Console.WriteLine("2. Buscar usuario");
-        Console.WriteLine("3. Reportes");
-        Console.WriteLine("0. Volver al menu principal");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // ACCESO A LOS SUBMENUS
-    // ==========================================
-
-    
-    // ==========================================
-    // FEATURE: BUSQUEDA DE LIBROS
-    // ==========================================
-
-    static void MenuBuscarLibro()
+    static void SearchBook()
     {
         int opcion;
 
         do
         {
-            MostrarMenuBuscarLibro();
+            Console.WriteLine();
+            Console.WriteLine("========== BUSCAR LIBRO ==========");
+            Console.WriteLine("1. Buscar por titulo");
+            Console.WriteLine("2. Buscar por autor");
+            Console.WriteLine("3. Buscar por ID / ISBN");
+            Console.WriteLine("4. Buscar por categoria");
+            Console.WriteLine("0. Volver");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    BuscarLibroPorTitulo();
+                    SearchBookByTitle();
                     break;
 
                 case 2:
-                    BuscarLibroPorAutor();
+                    SearchBookByAuthor();
                     break;
 
                 case 3:
-                    BuscarLibroPorIdIsbn();
+                    SearchBookByIdIsbn();
                     break;
 
                 case 4:
-                    BuscarLibroPorCategoria();
+                    SearchBookByCategory();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu de busquedas y reportes..."
-                    );
+                    Console.WriteLine("Regresando al menu de busquedas...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR SUBMENU DE BUSQUEDA
-    // ==========================================
-
-    static void MostrarMenuBuscarLibro()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("              BUSCAR LIBRO");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Buscar por titulo");
-        Console.WriteLine("2. Buscar por autor");
-        Console.WriteLine("3. Buscar por ID / ISBN");
-        Console.WriteLine("4. Buscar por categoria");
-        Console.WriteLine("0. Volver");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // ACCIONES DE BUSQUEDA
-    // ==========================================
-
-    static void BuscarLibroPorTitulo()
+    static void SearchBookByTitle()
     {
         Console.WriteLine(
             "Se ha seleccionado buscar libros por titulo."
         );
     }
 
-    static void BuscarLibroPorAutor()
+    static void SearchBookByAuthor()
     {
         Console.WriteLine(
             "Se ha seleccionado buscar libros por autor."
         );
     }
 
-    static void BuscarLibroPorIdIsbn()
+    static void SearchBookByIdIsbn()
     {
         Console.WriteLine(
             "Se ha seleccionado buscar libros por ID o ISBN."
         );
     }
 
-    static void BuscarLibroPorCategoria()
+    static void SearchBookByCategory()
     {
         Console.WriteLine(
             "Se ha seleccionado buscar libros por categoria."
         );
     }
 
+    // BUSQUEDA DE USUARIOS
 
-    
-    // ==========================================
-    // FEATURE: BUSQUEDA DE USUARIOS
-    // ==========================================
-
-    static void MenuBuscarUsuario()
+    static void SearchUser()
     {
         int opcion;
 
         do
         {
-            MostrarMenuBuscarUsuario();
+            Console.WriteLine();
+            Console.WriteLine("========== BUSCAR USUARIO ==========");
+            Console.WriteLine("1. Buscar por nombre");
+            Console.WriteLine("2. Buscar por ID / documento");
+            Console.WriteLine("0. Volver");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    BuscarUsuarioPorNombre();
+                    SearchUserByName();
                     break;
 
                 case 2:
-                    BuscarUsuarioPorDocumento();
+                    SearchUserById();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu de busquedas y reportes..."
-                    );
+                    Console.WriteLine("Regresando al menu de busquedas...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR SUBMENU DE BUSQUEDA DE USUARIOS
-    // ==========================================
-
-    static void MostrarMenuBuscarUsuario()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("           BUSCAR USUARIO");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Buscar por nombre");
-        Console.WriteLine("2. Buscar por ID / documento");
-        Console.WriteLine("0. Volver");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // ACCIONES DE BUSQUEDA
-    // ==========================================
-
-    static void BuscarUsuarioPorNombre()
+    static void SearchUserByName()
     {
         Console.WriteLine(
             "Se ha seleccionado buscar usuarios por nombre."
         );
     }
 
-    static void BuscarUsuarioPorDocumento()
+    static void SearchUserById()
     {
         Console.WriteLine(
             "Se ha seleccionado buscar usuarios por ID o documento."
         );
     }
 
+    // REPORTES
 
-    
-    // ==========================================
-    // FEATURE: REPORTES
-    // ==========================================
-
-    static void MenuReportes()
+    static void ShowReportsMenu()
     {
         int opcion;
 
         do
         {
-            MostrarMenuReportes();
+            Console.WriteLine();
+            Console.WriteLine("========== REPORTES ==========");
+            Console.WriteLine("1. Prestamos por usuario");
+            Console.WriteLine("2. Prestamos por libro");
+            Console.WriteLine("3. Prestamos vencidos");
+            Console.WriteLine("4. Resumen general de libros");
+            Console.WriteLine("0. Volver");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    ReportePrestamosPorUsuario();
+                    ReportByUser();
                     break;
 
                 case 2:
-                    ReportePrestamosPorLibro();
+                    ReportByBook();
                     break;
 
                 case 3:
-                    ReportePrestamosVencidos();
+                    ReportOverdue();
                     break;
 
                 case 4:
-                    ReporteResumenGeneral();
+                    ReportSummary();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu de busquedas y reportes..."
-                    );
+                    Console.WriteLine("Regresando al menu de busquedas...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR MENU DE REPORTES
-    // ==========================================
-
-    static void MostrarMenuReportes()
-    {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("                REPORTES");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Prestamos por usuario");
-        Console.WriteLine("2. Prestamos por libro");
-        Console.WriteLine("3. Prestamos vencidos");
-        Console.WriteLine("4. Resumen general de libros");
-        Console.WriteLine("0. Volver al menu de busquedas y reportes");
-        Console.WriteLine("========================================");
-    }
-
-    // ==========================================
-    // ACCIONES DE REPORTES
-    // ==========================================
-
-    static void ReportePrestamosPorUsuario()
+    static void ReportByUser()
     {
         Console.WriteLine(
             "Se ha seleccionado el reporte de prestamos por usuario."
         );
     }
 
-    static void ReportePrestamosPorLibro()
+    static void ReportByBook()
     {
         Console.WriteLine(
             "Se ha seleccionado el reporte de prestamos por libro."
         );
     }
 
-    static void ReportePrestamosVencidos()
+    static void ReportOverdue()
     {
         Console.WriteLine(
             "Se ha seleccionado el reporte de prestamos vencidos."
         );
     }
 
-    static void ReporteResumenGeneral()
+    static void ReportSummary()
     {
         Console.WriteLine(
             "Se ha seleccionado el resumen general de libros."
         );
+
+        Console.WriteLine(
+            "El resumen contempla total de libros, disponibles y prestados."
+        );
     }
 
-
-
     // ==========================================
-    // MODULO DE GUARDAR / CARGAR DATOS
+    // FEATURE: PERSISTENCE MENU
     // ==========================================
 
-    
-    // ==========================================
-    // FEATURE: GUARDAR Y CARGAR DATOS
-    // ==========================================
-
-    static void MenuGuardarCargar()
+    static void ShowPersistenceMenu()
     {
         int opcion;
 
         do
         {
-            MostrarMenuGuardarCargar();
+            Console.WriteLine();
+            Console.WriteLine("========================================");
+            Console.WriteLine("             GESTION DE DATOS");
+            Console.WriteLine("========================================");
+            Console.WriteLine("1. Guardar datos");
+            Console.WriteLine("2. Cargar datos");
+            Console.WriteLine("3. Reiniciar datos");
+            Console.WriteLine("0. Volver al menu principal");
+            Console.WriteLine("========================================");
 
-            opcion = LeerOpcion();
+            opcion = ReadOption();
 
             switch (opcion)
             {
                 case 1:
-                    GuardarDatos();
+                    SaveData();
                     break;
 
                 case 2:
-                    CargarDatos();
+                    LoadData();
                     break;
 
                 case 3:
-                    ConfirmarReinicioDatos();
+                    ConfirmResetData();
                     break;
 
                 case 0:
-                    Console.WriteLine(
-                        "Regresando al menu principal..."
-                    );
+                    Console.WriteLine("Regresando al menu principal...");
                     break;
 
                 default:
-                    MostrarOpcionInvalida();
+                    ShowInvalidOption();
                     break;
             }
 
         } while (opcion != 0);
     }
 
-    // ==========================================
-    // MOSTRAR MENU DE GESTION DE DATOS
-    // ==========================================
-
-    static void MostrarMenuGuardarCargar()
+    static void SaveData()
     {
-        Console.WriteLine();
-        Console.WriteLine("========================================");
-        Console.WriteLine("             GESTION DE DATOS");
-        Console.WriteLine("========================================");
-        Console.WriteLine("1. Guardar datos");
-        Console.WriteLine("2. Cargar datos");
-        Console.WriteLine("3. Reiniciar datos");
-        Console.WriteLine("0. Volver al menu principal");
-        Console.WriteLine("========================================");
+        Console.WriteLine(
+            "Se ha seleccionado guardar los datos de la biblioteca."
+        );
+
+        Console.WriteLine(
+            "La persistencia real no se implementa en esta actividad."
+        );
     }
 
-    // ==========================================
-    // CARGAR DATOS
-    // ==========================================
-
-    static void CargarDatos()
+    static void LoadData()
     {
         Console.WriteLine(
             "Se ha seleccionado cargar los datos de la biblioteca."
         );
+
+        Console.WriteLine(
+            "La carga real de datos no se implementa en esta actividad."
+        );
     }
 
-    // ==========================================
-    // CONFIRMAR REINICIO
-    // ==========================================
-
-    static void ConfirmarReinicioDatos()
+    static void ConfirmResetData()
     {
         while (true)
         {
             Console.Write(
-                "¿Confirma que desea reiniciar todos los datos? (S/N): "
+                "¿Confirma que desea reiniciar los datos? (S/N): "
             );
 
             string respuesta = (
@@ -1160,7 +952,7 @@ class Program
             if (respuesta.Equals(
                 "S", StringComparison.OrdinalIgnoreCase))
             {
-                ReiniciarDatos();
+                ResetData();
                 return;
             }
 
@@ -1170,6 +962,7 @@ class Program
                 Console.WriteLine(
                     "Se ha cancelado el reinicio de datos."
                 );
+
                 return;
             }
 
@@ -1179,33 +972,16 @@ class Program
         }
     }
 
-    // ==========================================
-    // REINICIAR DATOS
-    // ==========================================
-
-    static void ReiniciarDatos()
+    static void ResetData()
     {
         Console.WriteLine(
             "Se ha seleccionado reiniciar los datos de la biblioteca."
         );
-    }
 
-
-    // ==========================================
-    // GUARDAR DATOS
-    // ==========================================
-
-    static void GuardarDatos()
-    {
         Console.WriteLine(
-            "La funcionalidad de guardar datos se desarrollara posteriormente."
+            "El reinicio real no se implementa en esta actividad."
         );
     }
-
-    // ==========================================
-    // FINALIZAR PROGRAMA
-    // ==========================================
-
 
     // ==========================================
     // FEATURE: EXIT FLOW
@@ -1226,7 +1002,7 @@ class Program
             if (respuesta.Equals(
                 "S", StringComparison.OrdinalIgnoreCase))
             {
-                GuardarDatos();
+                SaveData();
 
                 Console.WriteLine(
                     "Gracias por utilizar el sistema de biblioteca."
@@ -1260,10 +1036,10 @@ class Program
     }
 
     // ==========================================
-    // FUNCIONES GENERALES
+    // FUNCIONES AUXILIARES
     // ==========================================
 
-    static int LeerOpcion()
+    static int ReadOption()
     {
         Console.Write("Seleccione una opcion: ");
 
@@ -1277,7 +1053,7 @@ class Program
         return -1;
     }
 
-    static void MostrarOpcionInvalida()
+    static void ShowInvalidOption()
     {
         Console.WriteLine(
             "Opcion no valida. Intente nuevamente."
