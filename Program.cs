@@ -49,8 +49,7 @@ class Program
                     break;
 
                 case 6:
-                    Salir();
-                    continuar = false;
+                    continuar = !ConfirmExitAndSave();
                     break;
 
                 default:
@@ -1207,7 +1206,12 @@ class Program
     // FINALIZAR PROGRAMA
     // ==========================================
 
-    static void Salir()
+
+    // ==========================================
+    // FEATURE: EXIT FLOW
+    // ==========================================
+
+    static bool ConfirmExitAndSave()
     {
         while (true)
         {
@@ -1223,26 +1227,36 @@ class Program
                 "S", StringComparison.OrdinalIgnoreCase))
             {
                 GuardarDatos();
-                break;
+
+                Console.WriteLine(
+                    "Gracias por utilizar el sistema de biblioteca."
+                );
+
+                Console.WriteLine("Programa finalizado.");
+
+                return true;
             }
 
             if (respuesta.Equals(
                 "N", StringComparison.OrdinalIgnoreCase))
             {
-                break;
+                Console.WriteLine(
+                    "Se saldra sin guardar los datos."
+                );
+
+                Console.WriteLine(
+                    "Gracias por utilizar el sistema de biblioteca."
+                );
+
+                Console.WriteLine("Programa finalizado.");
+
+                return true;
             }
 
             Console.WriteLine(
                 "Respuesta no valida. Escriba S o N."
             );
         }
-
-        Console.WriteLine();
-        Console.WriteLine(
-            "Gracias por utilizar el sistema de biblioteca."
-        );
-
-        Console.WriteLine("Programa finalizado.");
     }
 
     // ==========================================
