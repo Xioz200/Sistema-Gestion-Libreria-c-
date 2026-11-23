@@ -181,9 +181,7 @@ class Program
 
     static void ListBooksAll()
     {
-        Console.WriteLine(
-            "Se ha seleccionado listar todos los libros."
-        );
+        MostrarPruebaLibros();
     }
 
     static void ListBooksAvailable()
@@ -353,9 +351,7 @@ class Program
 
     static void ListUsers()
     {
-        Console.WriteLine(
-            "Se ha seleccionado listar los usuarios."
-        );
+        MostrarPruebaUsuarios();
     }
 
     static void ViewUserDetail()
@@ -500,14 +496,7 @@ class Program
 
     static void CreateLoan()
     {
-        Console.WriteLine(
-            "Se ha seleccionado crear un prestamo."
-        );
-
-        Console.WriteLine("Validaciones sugeridas:");
-        Console.WriteLine("- El usuario debe existir y estar activo.");
-        Console.WriteLine("- El libro debe existir y estar disponible.");
-        Console.WriteLine("- Verificar el maximo de prestamos activos por usuario.");
+        MostrarPruebaPrestamo();
     }
 
     // LISTAR PRESTAMOS
@@ -1058,5 +1047,118 @@ class Program
         Console.WriteLine(
             "Opcion no valida. Intente nuevamente."
         );
+    }
+
+    // ==========================================
+    // PRUEBAS DE LOS MODELOS DEL DOMINIO
+    // ==========================================
+
+    static void MostrarPruebaLibros()
+    {
+        Libro libro1 = new Libro(
+            "ISBN-001",
+            "Cien años de soledad",
+            "Gabriel García Márquez",
+            "Novela",
+            1967,
+            true
+        );
+
+        Libro libro2 = new Libro(
+            "ISBN-002",
+            "El principito",
+            "Antoine de Saint-Exupéry",
+            "Literatura",
+            1943,
+            false
+        );
+
+        Console.WriteLine("\n===== PRUEBA DE MODELO LIBRO =====");
+
+        Console.WriteLine("\n--- Resumen de libros ---");
+        Console.WriteLine(libro1.ResumenCorto());
+        Console.WriteLine(libro2.ResumenCorto());
+
+        Console.WriteLine("\n--- Detalle del primer libro ---");
+        Console.WriteLine(libro1.DetalleCompleto());
+
+        Console.WriteLine("\n--- Detalle del segundo libro ---");
+        Console.WriteLine(libro2.DetalleCompleto());
+
+        Console.WriteLine("\n--- Disponibilidad ---");
+        Console.WriteLine($"Libro 1 disponible: {libro1.Disponible}");
+        Console.WriteLine($"Libro 2 disponible: {libro2.Disponible}");
+
+        Console.WriteLine("\n--- Método ToString ---");
+        Console.WriteLine(libro1.ToString());
+        Console.WriteLine(libro2.ToString());
+    }
+
+    static void MostrarPruebaUsuarios()
+    {
+        Usuario usuario1 = new Usuario(
+            "1001001001",
+            "Ana López",
+            "3001234567",
+            "ana@email.com",
+            true
+        );
+
+        Usuario usuario2 = new Usuario(
+            "1002002002",
+            "Carlos Pérez",
+            "3107654321",
+            "carlos@email.com",
+            false
+        );
+
+        Console.WriteLine("\n===== PRUEBA DE MODELO USUARIO =====");
+
+        Console.WriteLine("\n--- Resumen de usuarios ---");
+        Console.WriteLine(usuario1.ResumenCorto());
+        Console.WriteLine(usuario2.ResumenCorto());
+
+        Console.WriteLine("\n--- Detalle del primer usuario ---");
+        Console.WriteLine(usuario1.DetalleCompleto());
+
+        Console.WriteLine("\n--- Detalle del segundo usuario ---");
+        Console.WriteLine(usuario2.DetalleCompleto());
+
+        Console.WriteLine("\n--- Estado de los usuarios ---");
+        Console.WriteLine($"Usuario 1 activo: {usuario1.Activo}");
+        Console.WriteLine($"Usuario 2 activo: {usuario2.Activo}");
+
+        Console.WriteLine("\n--- Método ToString ---");
+        Console.WriteLine(usuario1.ToString());
+        Console.WriteLine(usuario2.ToString());
+    }
+
+    static void MostrarPruebaPrestamo()
+    {
+        Prestamo prestamo1 = new Prestamo(
+            1,
+            "1001001001",
+            "ISBN-001",
+            DateTime.Today.AddDays(-10),
+            DateTime.Today.AddDays(-3),
+            null,
+            EstadoPrestamo.Vencido
+        );
+
+        Console.WriteLine("\n===== PRUEBA DE MODELO PRESTAMO =====");
+
+        Console.WriteLine("\n--- Resumen del préstamo ---");
+        Console.WriteLine(prestamo1.ResumenCorto());
+
+        Console.WriteLine("\n--- Detalle completo ---");
+        Console.WriteLine(prestamo1.DetalleCompleto());
+
+        Console.WriteLine("\n--- Validación del préstamo ---");
+        Console.WriteLine($"Estado: {prestamo1.Estado}");
+        Console.WriteLine($"¿Está vencido?: {prestamo1.EstaVencido()}");
+        Console.WriteLine($"Días transcurridos: {prestamo1.DiasTranscurridos()}");
+
+        Console.WriteLine("\n--- Método ToString ---");
+        Console.WriteLine(prestamo1.ToString());
     }
 }
