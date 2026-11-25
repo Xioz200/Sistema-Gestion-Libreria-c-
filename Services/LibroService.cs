@@ -116,4 +116,25 @@ public class LibroService
             .OrderBy(l => l.Anio)
             .ToList();
     }
+        // ==========================================
+    // ESTADÍSTICAS (KPIs)
+    // ==========================================
+
+    // Obtener la cantidad total de libros registrados.
+    public int ObtenerTotalLibros()
+    {
+        return libros.Count;
+    }
+
+    // Contar los libros disponibles.
+    public int ContarLibrosDisponibles()
+    {
+        return libros.Count(l => l.Disponible);
+    }
+
+    // Contar los libros que están prestados.
+    public int ContarLibrosPrestados()
+    {
+        return libros.Count(l => !l.Disponible);
+    }
 }
