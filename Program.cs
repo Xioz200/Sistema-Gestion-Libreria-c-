@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 class Program
 {
@@ -9,7 +9,19 @@ class Program
 
     static void Main()
     {
+        // Prueba del servicio de libros.
+        MostrarPruebaLibroService();
+
+        // Prueba del servicio de usuarios.
+        MostrarPruebaUsuarioService();
+
+        MostrarPruebaPrestamoService();
+        MostrarComparacionArrayList();
+
+        // Iniciar el menú principal.
         ShowMainMenu();
+
+
     }
 
     // ==========================================
@@ -497,6 +509,90 @@ class Program
     static void CreateLoan()
     {
         MostrarPruebaPrestamo();
+    }
+
+    // ==========================================
+    // PRUEBAS DEL SERVICIO DE USUARIOS
+    // ==========================================
+
+    static void MostrarPruebaUsuarioService()
+    {
+        UsuarioService servicioUsuarios = new UsuarioService();
+
+        servicioUsuarios.AgregarUsuario(new Usuario(
+            "1001001001", "Ana López", "3001234567",
+            "ana@email.com", true
+        ));
+
+        servicioUsuarios.AgregarUsuario(new Usuario(
+            "1002002002", "Carlos Pérez", "3107654321",
+            "carlos@email.com", false
+        ));
+
+        servicioUsuarios.AgregarUsuario(new Usuario(
+            "1003003003", "María Gómez", "3209876543",
+            "maria@email.com", true
+        ));
+
+        servicioUsuarios.AgregarUsuario(new Usuario(
+            "1004004004", "Andrés Rodríguez", "3155555555",
+            "andres@email.com", true
+        ));
+
+        Console.WriteLine("\n===== PRUEBAS DEL SERVICIO DE USUARIOS =====");
+
+        Console.WriteLine("\n--- Todos los usuarios ---");
+
+        foreach (Usuario usuario in servicioUsuarios.ObtenerTodos())
+        {
+            Console.WriteLine(usuario.ResumenCorto());
+        }
+
+        Console.WriteLine("\n--- Buscar por documento ---");
+
+        Usuario? encontrado =
+            servicioUsuarios.BuscarPorDocumento("1001001001");
+
+        Console.WriteLine(
+            encontrado?.ResumenCorto() ?? "Usuario no encontrado."
+        );
+
+        Console.WriteLine("\n--- Buscar por nombre: Carlos ---");
+
+        foreach (Usuario usuario in servicioUsuarios.BuscarPorNombre("Carlos"))
+        {
+            Console.WriteLine(usuario.ResumenCorto());
+        }
+
+        Console.WriteLine("\n--- Usuarios ordenados por nombre ---");
+
+        foreach (Usuario usuario in servicioUsuarios.OrdenarPorNombre())
+        {
+            Console.WriteLine(usuario.Nombre);
+        }
+
+        Console.WriteLine("\n--- Eliminar usuario ---");
+
+        bool eliminado = servicioUsuarios.EliminarUsuario("1004004004");
+
+        Console.WriteLine(
+            eliminado ? "Usuario eliminado correctamente."
+                      : "No se encontró el usuario."
+        );
+
+        Console.WriteLine(
+            $"Total de usuarios después de eliminar: {servicioUsuarios.ObtenerTodos().Count}"
+        );
+        Console.WriteLine("\n--- ESTADÍSTICAS DE USUARIOS ---");
+
+        Console.WriteLine(
+            $"Total de usuarios: {servicioUsuarios.ObtenerTotalUsuarios()}");
+
+        Console.WriteLine(
+            $"Usuarios activos: {servicioUsuarios.ContarUsuariosActivos()}");
+
+        Console.WriteLine(
+            $"Usuarios inactivos: {servicioUsuarios.ContarUsuariosInactivos()}");
     }
 
     // LISTAR PRESTAMOS
@@ -1161,4 +1257,266 @@ class Program
         Console.WriteLine("\n--- Método ToString ---");
         Console.WriteLine(prestamo1.ToString());
     }
+
+    // ==========================================
+    // PRUEBAS DEL SERVICIO DE LIBROS
+    // ==========================================
+
+    static void MostrarPruebaLibroService()
+    {
+        LibroService servicioLibros = new LibroService();
+
+        // Registrar libros de prueba.
+        servicioLibros.AgregarLibro(new Libro(
+            "ISBN-S001",
+            "El principito",
+            "Antoine de Saint-Exupéry",
+            "Literatura",
+            1943,
+            true
+        ));
+
+        servicioLibros.AgregarLibro(new Libro(
+            "ISBN-S002",
+            "Cien años de soledad",
+            "Gabriel García Márquez",
+            "Novela",
+            1967,
+            false
+        ));
+
+        servicioLibros.AgregarLibro(new Libro(
+            "ISBN-S003",
+            "La vorágine",
+            "José Eustasio Rivera",
+            "Novela",
+            1924,
+            true
+        ));
+
+        servicioLibros.AgregarLibro(new Libro(
+            "ISBN-S004",
+            "Don Quijote de la Mancha",
+            "Miguel de Cervantes",
+            "Novela",
+            1605,
+            true
+        ));
+
+        Console.WriteLine("\n===== PRUEBAS DEL SERVICIO DE LIBROS =====");
+
+        // Obtener todos los libros.
+        Console.WriteLine("\n--- Todos los libros ---");
+
+        foreach (Libro libro in servicioLibros.ObtenerTodos())
+        {
+            Console.WriteLine(libro.ResumenCorto());
+        }
+
+        // Buscar por ISBN.
+        Console.WriteLine("\n--- Buscar por ISBN: ISBN-S001 ---");
+
+        Libro? encontrado = servicioLibros.BuscarPorIsbn("ISBN-S001");
+
+        Console.WriteLine(
+            encontrado?.ResumenCorto() ?? "Libro no encontrado."
+        );
+
+        // Buscar por título.
+        Console.WriteLine("\n--- Buscar por título: cien ---");
+
+        foreach (Libro libro in servicioLibros.BuscarPorTitulo("cien"))
+        {
+            Console.WriteLine(libro.ResumenCorto());
+        }
+
+        // Buscar por autor.
+        Console.WriteLine("\n--- Buscar por autor: Gabriel ---");
+
+        foreach (Libro libro in servicioLibros.BuscarPorAutor("Gabriel"))
+        {
+            Console.WriteLine(libro.ResumenCorto());
+        }
+
+        // Ordenar por título.
+        Console.WriteLine("\n--- Libros ordenados por título ---");
+
+        foreach (Libro libro in servicioLibros.OrdenarPorTitulo())
+        {
+            Console.WriteLine(libro.Titulo);
+        }
+
+        // Ordenar por año.
+        Console.WriteLine("\n--- Libros ordenados por año ---");
+
+        foreach (Libro libro in servicioLibros.OrdenarPorAnio())
+        {
+            Console.WriteLine($"{libro.Anio} - {libro.Titulo}");
+        }
+
+        // Eliminar por ISBN.
+        Console.WriteLine("\n--- Eliminar libro ISBN-S004 ---");
+
+        bool eliminado = servicioLibros.EliminarLibro("ISBN-S004");
+
+        Console.WriteLine(
+            eliminado
+                ? "Libro eliminado correctamente."
+                : "No se encontró el libro."
+        );
+
+        Console.WriteLine(
+            $"Total de libros después de eliminar: {servicioLibros.ObtenerTodos().Count}"
+        );
+        Console.WriteLine("\n--- ESTADISTICAS DE LIBROS ---");
+
+        Console.WriteLine(
+            $"Total de libros: {servicioLibros.ObtenerTotalLibros()}");
+
+        Console.WriteLine(
+            $"Libros disponibles: {servicioLibros.ContarLibrosDisponibles()}");
+
+        Console.WriteLine(
+            $"Libros prestados: {servicioLibros.ContarLibrosPrestados()}");
+    }
+
+    static void MostrarPruebaPrestamoService()
+    {
+        PrestamoService servicioPrestamos = new PrestamoService();
+
+        DateTime hoy = DateTime.Today;
+
+        // Préstamo activo
+        Prestamo prestamo1 = new Prestamo(
+            1, "1001001001", "ISBN-S001",
+            hoy.AddDays(-2), hoy.AddDays(5)
+        );
+
+        // Préstamo vencido
+        Prestamo prestamo2 = new Prestamo(
+            2, "1002002002", "ISBN-S002",
+            hoy.AddDays(-10), hoy.AddDays(-5)
+        );
+
+        // Préstamo devuelto
+        Prestamo prestamo3 = new Prestamo(
+            3, "1003003003", "ISBN-S003",
+            hoy.AddDays(-20), hoy.AddDays(-6),
+            hoy.AddDays(-12), EstadoPrestamo.Devuelto
+        );
+
+        servicioPrestamos.AgregarPrestamo(prestamo1);
+        servicioPrestamos.AgregarPrestamo(prestamo2);
+        servicioPrestamos.AgregarPrestamo(prestamo3);
+
+        Console.WriteLine("\n===== PRUEBAS DEL SERVICIO DE PRESTAMOS =====");
+
+        // Obtener todos
+        Console.WriteLine("\n--- Todos los prestamos ---");
+
+        foreach (Prestamo prestamo in servicioPrestamos.ObtenerTodos())
+        {
+            Console.WriteLine(prestamo.ResumenCorto());
+        }
+
+        // Buscar por ID
+        Console.WriteLine("\n--- Buscar prestamo por ID: 2 ---");
+
+        Prestamo? encontrado = servicioPrestamos.BuscarPorId(2);
+
+        Console.WriteLine(encontrado != null
+            ? encontrado.DetalleCompleto()
+            : "Prestamo no encontrado.");
+
+        // Buscar por estado
+        Console.WriteLine("\n--- Prestamos devueltos ---");
+
+        foreach (Prestamo prestamo in servicioPrestamos.BuscarPorEstado(
+            EstadoPrestamo.Devuelto))
+        {
+            Console.WriteLine(prestamo.ResumenCorto());
+        }
+
+        // Ordenar por fecha limite
+        Console.WriteLine("\n--- Prestamos ordenados por fecha limite ---");
+
+        foreach (Prestamo prestamo in servicioPrestamos.OrdenarPorFechaLimite())
+        {
+            Console.WriteLine(
+                $"{prestamo.IdPrestamo} - {prestamo.FechaLimite:dd/MM/yyyy}"
+            );
+        }
+
+        // KPIs
+        Console.WriteLine("\n--- ESTADISTICAS DE PRESTAMOS ---");
+
+        Console.WriteLine(
+            $"Total de prestamos: {servicioPrestamos.ObtenerTotalPrestamos()}");
+
+        Console.WriteLine(
+            $"Prestamos activos: {servicioPrestamos.ContarPrestamosActivos()}");
+
+        Console.WriteLine(
+            $"Prestamos vencidos: {servicioPrestamos.ContarPrestamosVencidos()}");
+
+        Console.WriteLine(
+            $"Prestamos devueltos: {servicioPrestamos.ContarPrestamosDevueltos()}");
+
+        Console.WriteLine(
+            $"Promedio de dias: {servicioPrestamos.ObtenerPromedioDiasPrestamo():F2}");
+
+        // Eliminar
+        Console.WriteLine("\n--- Eliminar prestamo con ID 3 ---");
+
+        bool eliminado = servicioPrestamos.EliminarPrestamo(3);
+
+        Console.WriteLine(eliminado
+            ? "Prestamo eliminado correctamente."
+            : "No se encontro el prestamo.");
+
+        Console.WriteLine(
+            $"Total despues de eliminar: {servicioPrestamos.ObtenerTotalPrestamos()}");
+    }
+    static void MostrarComparacionArrayList()
+    {
+        Console.WriteLine("\n===== COMPARACION ARRAY VS LIST =====");
+
+        // ARRAY: tiene un tamaño fijo.
+        string[] librosArray = new string[2];
+
+        librosArray[0] = "El principito";
+        librosArray[1] = "La voragine";
+
+        Console.WriteLine("\n--- Array ---");
+
+        foreach (string libro in librosArray)
+        {
+            Console.WriteLine(libro);
+        }
+
+        Console.WriteLine($"Cantidad de elementos: {librosArray.Length}");
+
+        // LIST: permite agregar y eliminar elementos dinamicamente.
+        List<string> librosList = new List<string>();
+
+        librosList.Add("El principito");
+        librosList.Add("La voragine");
+        librosList.Add("Cien años de soledad");
+
+        Console.WriteLine("\n--- List ---");
+
+        foreach (string libro in librosList)
+        {
+            Console.WriteLine(libro);
+        }
+
+        Console.WriteLine($"Cantidad de elementos: {librosList.Count}");
+
+        // Comparación.
+        Console.WriteLine("\n--- Diferencias ---");
+        Console.WriteLine("Array: tiene un tamaño fijo.");
+        Console.WriteLine("List: permite agregar y eliminar elementos.");
+    }
+
+
 }
