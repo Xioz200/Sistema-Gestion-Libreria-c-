@@ -593,6 +593,54 @@ class Program
 
         Console.WriteLine(
             $"Usuarios inactivos: {servicioUsuarios.ContarUsuariosInactivos()}");
+
+        // ==========================================
+        // PRUEBAS DE CASOS NEGATIVOS
+        // ==========================================
+
+        Console.WriteLine("\n--- Pruebas de casos negativos ---");
+
+        // Intentar registrar un usuario duplicado.
+        Console.WriteLine("\nIntentar agregar un usuario duplicado:");
+
+        try
+        {
+            servicioUsuarios.AgregarUsuario(new Usuario(
+                "1001001001",
+                "Usuario duplicado",
+                "3000000000",
+                "duplicado@email.com",
+                true
+            ));
+        }
+        catch (InvalidOperationException ex)
+        {
+            Console.WriteLine($"Error controlado: {ex.Message}");
+        }
+
+        // Buscar un usuario inexistente.
+        Console.WriteLine("\nBuscar un documento inexistente:");
+
+        Usuario? usuarioInexistente =
+            servicioUsuarios.BuscarPorDocumento("9999999999");
+
+        Console.WriteLine(
+            usuarioInexistente == null
+                ? "Usuario no encontrado. Prueba correcta."
+                : usuarioInexistente.ToString()
+        );
+
+        // Intentar eliminar un usuario inexistente.
+        Console.WriteLine("\nEliminar un documento inexistente:");
+
+        bool eliminacionInexistente =
+            servicioUsuarios.EliminarUsuario("9999999999");
+
+        Console.WriteLine(
+            eliminacionInexistente
+                ? "Usuario eliminado."
+                : "No se encontró el usuario. Prueba correcta."
+        );
     }
 
     // LISTAR PRESTAMOS
@@ -1378,6 +1426,53 @@ class Program
 
         Console.WriteLine(
             $"Libros prestados: {servicioLibros.ContarLibrosPrestados()}");
+        // ==========================================
+        // PRUEBAS DE CASOS NEGATIVOS
+        // ==========================================
+
+        Console.WriteLine("\n--- Pruebas de casos negativos ---");
+
+        // Intentar agregar un libro con ISBN duplicado.
+        Console.WriteLine("\nIntentar agregar un libro duplicado:");
+
+        try
+        {
+            servicioLibros.AgregarLibro(new Libro(
+                "ISBN-S001",
+                "Libro duplicado",
+                "Autor de prueba",
+                "Literatura",
+                2020,
+                true
+            ));
+        }
+        catch (InvalidOperationException ex)
+        {
+            Console.WriteLine($"Error controlado: {ex.Message}");
+        }
+
+        // Buscar un libro que no existe.
+        Console.WriteLine("\nBuscar un ISBN inexistente:");
+
+        Libro? libroInexistente = servicioLibros.BuscarPorIsbn("ISBN-999");
+
+        Console.WriteLine(
+            libroInexistente == null
+                ? "Libro no encontrado. Prueba correcta."
+                : libroInexistente.ResumenCorto()
+        );
+
+        // Intentar eliminar un libro inexistente.
+        Console.WriteLine("\nEliminar un ISBN inexistente:");
+
+        bool eliminacionInexistente =
+            servicioLibros.EliminarLibro("ISBN-999");
+
+        Console.WriteLine(
+            eliminacionInexistente
+                ? "Libro eliminado."
+                : "No se encontró el libro. Prueba correcta."
+        );
     }
 
     static void MostrarPruebaPrestamoService()
@@ -1476,6 +1571,52 @@ class Program
 
         Console.WriteLine(
             $"Total despues de eliminar: {servicioPrestamos.ObtenerTotalPrestamos()}");
+        // ==========================================
+        // PRUEBAS DE CASOS NEGATIVOS
+        // ==========================================
+
+        Console.WriteLine("\n--- Pruebas de casos negativos ---");
+
+        // Intentar registrar un préstamo duplicado.
+        Console.WriteLine("\nIntentar agregar un préstamo duplicado:");
+
+        Prestamo? prestamoExistente = servicioPrestamos.BuscarPorId(1);
+
+        if (prestamoExistente != null)
+        {
+            try
+            {
+                servicioPrestamos.AgregarPrestamo(prestamoExistente);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"Error controlado: {ex.Message}");
+            }
+        }
+
+        // Buscar un préstamo inexistente.
+        Console.WriteLine("\nBuscar un préstamo con ID inexistente:");
+
+        Prestamo? prestamoInexistente =
+            servicioPrestamos.BuscarPorId(999);
+
+        Console.WriteLine(
+            prestamoInexistente == null
+                ? "Préstamo no encontrado. Prueba correcta."
+                : prestamoInexistente.ResumenCorto()
+        );
+
+        // Intentar eliminar un préstamo inexistente.
+        Console.WriteLine("\nEliminar un préstamo con ID inexistente:");
+
+        bool eliminacionInexistente =
+            servicioPrestamos.EliminarPrestamo(999);
+
+        Console.WriteLine(
+            eliminacionInexistente
+                ? "Préstamo eliminado."
+                : "No se encontró el préstamo. Prueba correcta."
+        );
     }
     static void MostrarComparacionArrayList()
     {
@@ -1516,6 +1657,7 @@ class Program
         Console.WriteLine("\n--- Diferencias ---");
         Console.WriteLine("Array: tiene un tamaño fijo.");
         Console.WriteLine("List: permite agregar y eliminar elementos.");
+
     }
 
 
